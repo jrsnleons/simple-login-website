@@ -16,18 +16,28 @@ const Register = () => {
                 password,
             });
 
-            setMessage("Registration successful!");
-            // const response = await fetch("https://example.com/api/register", {
-            // method: "POST",
-            // headers: { "Content-Type": "application/json" },
-            // body: JSON.stringify({ username, email, password }),
-            // });
-            //    if (response.ok) {
-            //   setMessage("Registration successful!");
-            //   // TODO: Redirect to home page or perform other actions
-            // } else {
-            //   setMessage("Registration failed. Please try again.");
-            // }
+            const response = await fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, email, password }),
+            });
+            if (response.ok) {
+                setMessage("Registration successful!  Login to continue.");
+
+            } else {
+                console.log(response);
+                if (response.status === 500) {
+                    setMessage("Server error. Please try again later.");
+                } else if (response.status === 400) {
+                    setMessage("All Field are required.");
+                } else if (response.status === 409) {
+                    setMessage("Email already exists.");
+                } else {
+                    setMessage("Registration failed. Please try again.");
+                }
+            }
         } catch (error) {
             console.error("Registration error:", error);
             setMessage("An error occurred. Please try again.");
