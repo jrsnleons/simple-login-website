@@ -60,35 +60,58 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h2>Login</h2>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
+        <div className="border-1 border-neutral-800 bg-neutral-900 rounded-md p-5 w-1/4">
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <h2 className="text-3xl font-bold mb-9 ">Login</h2>
+                    <div className="flex flex-col my-3">
+                        <label className="text-neutral-200 text-sm font-bold">
+                            Email:
+                        </label>
+                        <input
+                            className="bg-neutral-900 border-1 border-neutral-800 rounded mt-1 p-1 px-3 focus:outline-none text-sm text-neutral-300 placeholder:text-xs placeholder:text-neutral-700"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            disabled={loading}
+                            placeholder="example@email.com"
+                        />
+                    </div>
+                    <div className="flex flex-col my-3">
+                        <label className="text-neutral-200 text-sm font-bold">
+                            Password:
+                        </label>
+                        <input
+                            className="bg-neutral-900 border-1 border-neutral-800 rounded-sm mt-1 p-1 px-3 text-sm focus:outline-none text-neutral-300 placeholder:text-xs placeholder:text-neutral-700 "
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            disabled={loading}
+                            placeholder="***********"
+                        />
+                    </div>
+                    <button
+                        type="submit"
                         disabled={loading}
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        disabled={loading}
-                    />
-                </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? "Logging in..." : "Login"}
-                </button>
-                {message && <p>{message}</p>}
-            </form>
-            <p>Don't have an account? <Link to={"/register"}>Register</Link></p>
+                        className="bg-neutral-800 py-2 px-5 rounded-md w-full font-bold hover:cursor-pointer hover:bg-emerald-600 transition-colors ease-in-out duration-300 "
+                    >
+                        {loading ? "Logging in..." : "Login"}
+                    </button>
+                    {message && <p>{message}</p>}
+                </form>
+
+                <p className="font-thin text-xs text-right mt-2 text-neutral-400">
+                    Don't have an account?{" "}
+                    <Link
+                        className="hover:text-emerald-500 transition-colors animation ease-in font-bold"
+                        to={"/register"}
+                    >
+                        Register
+                    </Link>
+                </p>
+            </div>
         </div>
     );
 };

@@ -21,7 +21,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Welcome to Home!</h1>
+            <h1 className="text-emerald-400">Welcome to Home!</h1>
             <p>You are successfully logged in.</p>
             {user && (
                 <div>
